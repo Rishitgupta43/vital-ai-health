@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>V.I.T.A.L AI</title>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+
+<div class="overlay"></div>
+
+<div class="chat-container">
+
+    <h1>🧠 V.I.T.A.L AI</h1>
+    <p class="subtitle">Advanced Predictive Health Intelligence</p>
+
+    <div id="chat-box" class="chat-box"></div>
+
+    <form id="chat-form">
+
+        <textarea id="message1" placeholder="Enter Symptoms..." required></textarea>
+        <textarea id="message2" placeholder="Enter Vitals (optional)..."></textarea>
+        <textarea id="message3" placeholder="Enter Facial Indicators (optional)..."></textarea>
+
+        <div class="button-group">
+            <button type="submit" class="send-btn">Send</button>
+            <button type="button" class="clear-btn">Start New Chat</button>
+        </div>
+
+    </form>
+
+</div>
+
+<!-- JS -->
+<script src="{{ url_for('static', filename='js/script.js') }}"></script>
+
+</body>
+</html>

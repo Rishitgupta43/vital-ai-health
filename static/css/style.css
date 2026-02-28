@@ -1,0 +1,177 @@
+body {
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+
+    background-image: url("https://static.vecteezy.com/system/resources/thumbnails/020/411/854/small/healthcare-heart-shape-with-blue-cardio-pulse-heartbeat-lone-medical-abstract-background-modern-simple-design-icon-sign-or-logo-design-vector.jpg");
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: 110% auto;   /* KEY CHANGE */
+
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+}
+html, body {
+    height: 100%;
+}
+/* Overlay */
+.overlay {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background: rgba(10, 15, 25, 0.85);
+    backdrop-filter: blur(6px);
+    z-index: 0;
+}
+
+/* Main container */
+.chat-container {
+    position: relative;
+    z-index: 1;
+    width: 90%;
+    max-width: 720px;
+    margin: 40px auto;
+    padding: 25px;
+    border-radius: 20px;
+    background: rgba(255,255,255,0.08);
+    backdrop-filter: blur(15px);
+    box-shadow: 0 0 40px rgba(0,255,255,0.25);
+    animation: fadeIn 1s ease-in-out;
+}
+
+/* Header */
+h1 {
+    text-align: center;
+    color: #00f2ff;
+    margin-bottom: 5px;
+}
+
+.subtitle {
+    text-align: center;
+    color: #ccc;
+    margin-bottom: 20px;
+    font-size: 14px;
+}
+
+/* Chat box small initially */
+.chat-box {
+    height: 65px;
+    overflow-y: hidden;
+    padding: 10px 8px;
+    border-radius: 12px;
+    background: rgba(0,0,0,0.35);
+    color: white;
+    margin-bottom: 20px;
+    transition: height 0.6s ease, box-shadow 0.6s ease;
+}
+
+/* Expanded */
+.chat-box.active {
+    height: 320px;
+    overflow-y: auto;
+    box-shadow: 0 0 25px rgba(0,242,255,0.5);
+}
+
+/* Message wrapper */
+.message {
+    margin-bottom: 18px;
+    line-height: 1.6;
+    animation: fadeSlide 0.4s ease;
+}
+
+/* USER message */
+.message.user {
+    border-left: 3px solid #00f2ff;
+    padding-left: 10px;
+    margin-bottom: 25px;
+}
+
+/* AI message */
+.message.ai {
+    border-left: 3px solid #ff7b7b;
+    padding-left: 10px;
+    background: rgba(255,255,255,0.03);
+    padding-top: 8px;
+    padding-bottom: 8px;
+}
+
+/* Bullet spacing exactly 0.6em */
+.message.ai br + br {
+    margin-bottom: 0.6em;
+    display: block;
+    content: "";
+}
+
+/* Textareas */
+textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 12px;
+    border-radius: 10px;
+    border: none;
+    resize: none;
+    background: rgba(255,255,255,0.1);
+    color: white;
+}
+
+textarea::placeholder {
+    color: #bbb;
+}
+
+/* Buttons */
+.button-group {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.send-btn {
+    padding: 12px;
+    border: none;
+    border-radius: 12px;
+    background: linear-gradient(135deg, #00f2ff, #0066ff);
+    color: white;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.send-btn:hover {
+    transform: scale(1.05);
+}
+
+.clear-btn {
+    padding: 12px;
+    border: none;
+    border-radius: 12px;
+    background: linear-gradient(135deg, #ff416c, #ff4b2b);
+    color: white;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.clear-btn:hover {
+    transform: scale(1.05);
+}
+
+/* Fade out */
+.fade-out {
+    animation: fadeOut 0.5s forwards;
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from {opacity: 0;}
+    to {opacity: 1;}
+}
+
+@keyframes fadeSlide {
+    from {opacity: 0; transform: translateY(8px);}
+    to {opacity: 1; transform: translateY(0);}
+}
+
+@keyframes fadeOut {
+    from {opacity: 1;}
+    to {opacity: 0;}
+}
