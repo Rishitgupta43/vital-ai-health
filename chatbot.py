@@ -1,138 +1,133 @@
 from flask import Flask, render_template, request
 from google import genai
 
-API_KEY = "AIzaSyCNcfrc0dnhgr3k7d7HGqidw6OfsCBeAhQ"
+API_KEY = "AIzaSyACoyOjDgYdXn2zPMhgJfGap5jUcTFlKyA"
+
 client = genai.Client(api_key=API_KEY)
 
 app = Flask(__name__)
 
 
-def format_spacing(text):
-    """
-    Ensures one blank line after every bullet point.
-    """
+def format_response(text):
+
     lines = text.split("\n")
-    formatted_lines = []
+    formatted = []
 
     for line in lines:
-        formatted_lines.append(line)
-        if line.strip().startswith("•"):
-            formatted_lines.append("")  # add blank line
 
-    return "\n".join(formatted_lines)
+        line = line.strip()
+
+        if line.startswith("•") or line.startswith("-"):
+            formatted.append(line)
+            formatted.append("")  # blank line after bullet
+
+        else:
+            formatted.append(line)
+
+    return "\n".join(formatted)
 
 
 def get_response(prompt):
+
     try:
+
         response = client.models.generate_content(
             model="gemini-3-flash-preview",
             contents=prompt
         )
 
-        if hasattr(response, "text") and response.text:
-            return format_spacing(response.text.strip())
+        if response.text:
+            text = response.text.strip()
+            return format_response(text)
 
-        if response.candidates:
-            for part in response.candidates[0].content.parts:
-                if hasattr(part, "text") and part.text:
-                    return format_spacing(part.text.strip())
-
-        return "• System anomaly. Unable to generate response."
+        return "• Unable to generate response."
 
     except Exception as e:
-        print("GEMINI ERROR:", e)
-        return "⚠️ AI core malfunction. Check server terminal."
+        print(e)
+        return "• AI system error."
 
 
-@app.route('/')
+@app.route("/")
 def home():
-    return render_template('chatbot.html')
+    return render_template("chatbot.html")
 
 
-@app.route('/ask', methods=['POST'])
+@app.route("/ask", methods=["POST"])
 def ask():
-    msg1 = request.form.get('message1', '').strip()
-    msg2 = request.form.get('message2', '').strip()
-    msg3 = request.form.get('message3', '').strip()
 
-    if not msg1:
-        return "• Please provide symptom details for assessment."
+    msg1 = request.form.get("message1")
+    msg2 = request.form.get("message2")
+    msg3 = request.form.get("message3")
 
-    combined_message = f"""
-    You are V.I.T.A.L., an advanced AI clinical assessment system.
+    sleep_hours = request.form.get("sleep_hours")
+    sleep_quality = request.form.get("sleep_quality")
+    wake_refreshed = request.form.get("wake_refreshed")
 
-    Act as an experienced AI medical assistant.
-    Provide thorough, medically responsible explanations.
+    exercise_freq = request.form.get("exercise_freq")
+    exercise_type = request.form.get("exercise_type")
 
-    Explain clearly:
-    • What the condition is
-    • Why symptoms match
-    • What is happening in the body
-    • Practical home management
-    • Warning signs
+    diet_type = request.form.get("diet_type")
+    processed_food = request.form.get("processed_food")
 
-    Avoid vague phrases.
-    Avoid repetition.
-    Do not overlap ideas.
+    alcohol = request.form.get("alcohol")
+    smoking = request.form.get("smoking")
+    caffeine = request.form.get("caffeine")
 
-    INPUT DATA:
+    prompt = f"""
 
-    Symptoms:
-    {msg1}
+You are V.I.T.A.L, an advanced AI clinical health assistant.
 
-    Vitals:
-    {msg2}
+Analyze symptoms and lifestyle factors.
 
-    Facial Indicators:
-    {msg3}
+Symptoms:
+{msg1}
 
-    ---
+Vitals:
+{msg2}
 
-    STRICT OUTPUT FORMAT:
+Facial Indicators:
+{msg3}
 
-    🧠 VITAL Assessment
+Sleep:
+Average hours: {sleep_hours}
+Sleep quality: {sleep_quality}
+Wake refreshed: {wake_refreshed}
 
-    Most Likely Causes:
-    • Condition name with brief explanation of mechanism.
+Exercise:
+Frequency: {exercise_freq}
+Type: {exercise_type}
 
-    • Second possible condition with reasoning.
+Diet:
+Diet type: {diet_type}
+Ultra processed food: {processed_food}
 
-    Why It Matches:
-    • Clear link between symptom and condition.
+Substances:
+Alcohol: {alcohol}
+Smoking: {smoking}
+Caffeine: {caffeine}
 
-    • Supporting clinical reasoning.
+Respond strictly in bullet points.
 
-    Home Remedies:
-    • Specific remedy with explanation of benefit.
+FORMAT RULES:
+• Every statement must begin with "•"
+• One idea per bullet
+• No paragraphs
+• Leave one blank line after each bullet
 
-    • Additional care step and its purpose.
+Explain:
 
-    Precautions:
-    • What to avoid and why.
+• Most likely causes
+• Why symptoms match
+• Lifestyle impact
+• Home remedies
+• Precautions
+• When medical help is required
 
-    • Warning symptoms requiring attention.
+"""
 
-    Recommended Action:
-    • Immediate next step with reasoning.
+    reply = get_response(prompt)
 
-    • When medical consultation becomes necessary.
-
-    System Status:
-    • Choose ONE:
-    🟢 System Stable – Home care appropriate
-    🟡 Monitor Closely – Reassess in 24–48 hrs
-    🔴 Medical Attention Recommended
-
-    Rules:
-    • Detailed but structured.
-    • No paragraphs.
-    • Bullet format only.
-    • No unnecessary follow-up questions.
-    • Only ask if critical data is missing.
-    """
-
-    reply = get_response(combined_message)
-    return reply if reply else "• No response generated."
+    return reply
 
 
 if __name__ == "__main__":

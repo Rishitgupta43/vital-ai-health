@@ -1,40 +1,146 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>V.I.T.A.L. AI</title>
 
-    <!-- CSS -->
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>VITAL AI</title>
+
+<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600&display=swap" rel="stylesheet">
+
 </head>
 
 <body>
 
-<div class="overlay"></div>
-
 <div class="chat-container">
 
-    <h1>🧠 V.I.T.A.L AI</h1>
-    <p class="subtitle">Advanced Predictive Health Intelligence System</p>
+<h1>V.I.T.A.L</h1>
+<p class="subtitle">AI Clinical Health Assessment</p>
 
-    <div id="chat-box" class="chat-box"></div>
+<div id="ChatArea" class="chat-box"></div>
 
-    <form id="chat-form">
+<form id="chatForm">
 
-        <textarea id="message1" placeholder="Enter Symptoms..." required></textarea>
-        <textarea id="message2" placeholder="Enter Vitals (optional)..."></textarea>
-        <textarea id="message3" placeholder="Enter Facial Indicators (optional)..."></textarea>
+<textarea id="message1" placeholder="Enter Symptoms"></textarea>
 
-        <div class="button-group">
-            <button type="submit" class="send-btn">Send</button>
-            <button type="button" class="clear-btn">Start New Chat</button>
-        </div>
+<textarea id="message2" placeholder="Enter Vitals (heart rate, temperature etc)"></textarea>
 
-    </form>
+<textarea id="message3" placeholder="Facial indicators (pale, tired eyes etc)"></textarea>
+
+
+<!-- SLEEP -->
+
+<label>Sleep</label>
+
+<select id="sleep_hours">
+<option value="">Average sleep per night</option>
+<option value="<5h"><5 hours</option>
+<option value="5-6h">5–6 hours</option>
+<option value="6-7h">6–7 hours</option>
+<option value="7-8h">7–8 hours</option>
+<option value="8+h">8+ hours</option>
+</select>
+
+<select id="sleep_quality">
+<option value="">Sleep Quality</option>
+<option value="Poor">Poor</option>
+<option value="Average">Average</option>
+<option value="Good">Good</option>
+</select>
+
+<select id="wake_refreshed">
+<option value="">Wake up feeling refreshed?</option>
+<option>Yes</option>
+<option>No</option>
+</select>
+
+
+<!-- EXERCISE -->
+
+<label>Exercise</label>
+
+<select id="exercise_freq">
+<option value="">Exercise frequency</option>
+<option>0 days</option>
+<option>1–2 days</option>
+<option>3–4 days</option>
+<option>5+ days</option>
+</select>
+
+<select id="exercise_type">
+<option value="">Exercise type</option>
+<option>None</option>
+<option>Strength</option>
+<option>Cardio</option>
+<option>Mixed</option>
+</select>
+
+
+<!-- DIET -->
+
+<label>Diet</label>
+
+<select id="diet_type">
+<option value="">Diet type</option>
+<option>Non-Veg</option>
+<option>Vegetarian</option>
+<option>Vegan</option>
+</select>
+
+<select id="processed_food">
+<option value="">Ultra processed food intake</option>
+<option>Low</option>
+<option>Moderate</option>
+<option>High</option>
+</select>
+
+
+<!-- SUBSTANCES -->
+
+<label>Substances</label>
+
+<select id="alcohol">
+<option value="">Alcohol</option>
+<option>None</option>
+<option>Social</option>
+<option>Weekly</option>
+<option>Heavy</option>
+</select>
+
+<select id="smoking">
+<option value="">Smoking / Vaping</option>
+<option>Never</option>
+<option>Former</option>
+<option>Current</option>
+</select>
+
+<select id="caffeine">
+<option value="">Caffeine intake</option>
+<option>0</option>
+<option>1–2 cups</option>
+<option>3–4 cups</option>
+<option>5+</option>
+</select>
+
+
+<div class="button-group">
+
+<button type="submit" class="send-btn">ANALYZE</button>
+
+<button type="button" id="clearChat" class="clear-btn">NEW CHAT</button>
 
 </div>
 
-<!-- JS -->
+</form>
+
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
 <script src="{{ url_for('static', filename='js/script.js') }}"></script>
 
 </body>

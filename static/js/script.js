@@ -1,73 +1,77 @@
-const form = document.getElementById("chat-form");
-const chatBox = document.getElementById("chat-box");
-const clearBtn = document.querySelector(".clear-btn");
+$(document).ready(function(){
 
-/* SEND MESSAGE */
-form.addEventListener("submit", async function(e) {
-    e.preventDefault();
+function addMessage(text,type){
 
-    const msg1 = document.getElementById("message1").value.trim();
-    const msg2 = document.getElementById("message2").value.trim();
-    const msg3 = document.getElementById("message3").value.trim();
+let msg=$("<div>").addClass("message "+type)
 
-    if (!msg1) return;
+msg.text(text)
 
-    if (!chatBox.classList.contains("active")) {
-        chatBox.classList.add("active");
-    }
+$("#ChatArea").append(msg)
 
-    addMessage("You", msg1, "user");
+$("#ChatArea").scrollTop($("#ChatArea")[0].scrollHeight)
 
-    const formData = new FormData();
-    formData.append("message1", msg1);
-    formData.append("message2", msg2);
-    formData.append("message3", msg3);
-
-    try {
-        const response = await fetch("/ask", {
-            method: "POST",
-            body: formData
-        });
-
-        const data = await response.text();
-        addMessage("V.I.T.A.L", data, "ai");
-
-    } catch (error) {
-        addMessage("System", "⚠️ Server error. Please try again.", "ai");
-    }
-
-    form.reset();
-});
-
-/* ADD MESSAGE */
-function addMessage(sender, text, type) {
-
-    const messageDiv = document.createElement("div");
-    messageDiv.classList.add("message", type);
-
-    messageDiv.innerHTML = `
-        <strong>${sender}</strong><br><br>
-        ${text.replace(/\n/g, "<br>")}
-    `;
-
-    chatBox.appendChild(messageDiv);
-    chatBox.scrollTop = chatBox.scrollHeight;
 }
 
-/* CLEAR CHAT */
-clearBtn.addEventListener("click", function() {
+$("#chatForm").submit(function(e){
 
-    const messages = document.querySelectorAll(".message");
+e.preventDefault()
 
-    if (messages.length === 0) return;
+let msg1=$("#message1").val()
+let msg2=$("#message2").val()
+let msg3=$("#message3").val()
 
-    messages.forEach(msg => {
-        msg.classList.add("fade-out");
-    });
+let sleep_hours=$("#sleep_hours").val()
+let sleep_quality=$("#sleep_quality").val()
+let wake_refreshed=$("#wake_refreshed").val()
 
-    setTimeout(() => {
-        chatBox.innerHTML = "";
-        chatBox.classList.remove("active");
-    }, 500);
+let exercise_freq=$("#exercise_freq").val()
+let exercise_type=$("#exercise_type").val()
 
-});
+let diet_type=$("#diet_type").val()
+let processed_food=$("#processed_food").val()
+
+let alcohol=$("#alcohol").val()
+let smoking=$("#smoking").val()
+let caffeine=$("#caffeine").val()
+
+$("#ChatArea").addClass("active")
+
+addMessage(msg1,"user")
+
+$.post("/ask",{
+
+message1:msg1,
+message2:msg2,
+message3:msg3,
+
+sleep_hours:sleep_hours,
+sleep_quality:sleep_quality,
+wake_refreshed:wake_refreshed,
+
+exercise_freq:exercise_freq,
+exercise_type:exercise_type,
+
+diet_type:diet_type,
+processed_food:processed_food,
+
+alcohol:alcohol,
+smoking:smoking,
+caffeine:caffeine
+
+},function(data){
+
+addMessage(data,"ai")
+
+})
+
+})
+
+$("#clearChat").click(function(){
+
+$("#ChatArea").removeClass("active")
+
+$("#ChatArea").html("")
+
+})
+
+})

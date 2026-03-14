@@ -1,177 +1,228 @@
-body {
-    margin: 0;
-    font-family: 'Segoe UI', sans-serif;
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600&display=swap');
 
-    background-image: url("https://static.vecteezy.com/system/resources/thumbnails/020/411/854/small/healthcare-heart-shape-with-blue-cardio-pulse-heartbeat-lone-medical-abstract-background-modern-simple-design-icon-sign-or-logo-design-vector.jpg");
-    background-repeat: no-repeat;
-    background-position: center center;
-    background-size: 110% auto;   /* KEY CHANGE */
-
-    min-height: 100vh;
-    overflow-x: hidden;
-}
-}
-html, body {
-    height: 100%;
-}
-/* Overlay */
-.overlay {
-    position: fixed;
-    width: 100%;
-    height: 100%;
-    background: rgba(10, 15, 25, 0.85);
-    backdrop-filter: blur(6px);
-    z-index: 0;
+html,body{
+height:100%;
+margin:0;
+font-family:'Orbitron',sans-serif;
+background: radial-gradient(circle at top,#0f2027,#203a43,#2c5364);
+overflow-x:hidden;
 }
 
-/* Main container */
-.chat-container {
-    position: relative;
-    z-index: 1;
-    width: 90%;
-    max-width: 720px;
-    margin: 40px auto;
-    padding: 25px;
-    border-radius: 20px;
-    background: rgba(255,255,255,0.08);
-    backdrop-filter: blur(15px);
-    box-shadow: 0 0 40px rgba(0,255,255,0.25);
-    animation: fadeIn 1s ease-in-out;
+/* glowing background */
+
+body::before,
+body::after{
+content:"";
+position:fixed;
+width:500px;
+height:500px;
+border-radius:50%;
+filter:blur(120px);
+z-index:0;
 }
 
-/* Header */
-h1 {
-    text-align: center;
-    color: #00f2ff;
-    margin-bottom: 5px;
+body::before{
+background:rgba(0,255,255,0.15);
+top:-200px;
+left:-200px;
 }
 
-.subtitle {
-    text-align: center;
-    color: #ccc;
-    margin-bottom: 20px;
-    font-size: 14px;
+body::after{
+background:rgba(0,140,255,0.15);
+bottom:-200px;
+right:-200px;
 }
 
-/* Chat box small initially */
-.chat-box {
-    height: 65px;
-    overflow-y: hidden;
-    padding: 10px 8px;
-    border-radius: 12px;
-    background: rgba(0,0,0,0.35);
-    color: white;
-    margin-bottom: 20px;
-    transition: height 0.6s ease, box-shadow 0.6s ease;
+/* container */
+
+.chat-container{
+
+position:relative;
+z-index:1;
+
+width:95%;
+max-width:1000px;
+
+margin:auto;
+margin-top:30px;
+
+padding:25px;
+
+border-radius:20px;
+
+background:rgba(255,255,255,0.06);
+
+backdrop-filter:blur(25px);
+
+border:1px solid rgba(255,255,255,0.15);
+
+box-shadow:
+0 0 25px rgba(0,255,255,0.35),
+inset 0 0 20px rgba(0,255,255,0.08);
+
 }
 
-/* Expanded */
-.chat-box.active {
-    height: 320px;
-    overflow-y: auto;
-    box-shadow: 0 0 25px rgba(0,242,255,0.5);
+/* header */
+
+h1{
+text-align:center;
+color:#00f2ff;
+letter-spacing:2px;
 }
 
-/* Message wrapper */
-.message {
-    margin-bottom: 18px;
-    line-height: 1.6;
-    animation: fadeSlide 0.4s ease;
+.subtitle{
+text-align:center;
+color:#9fdcff;
+margin-bottom:20px;
 }
 
-/* USER message */
-.message.user {
-    border-left: 3px solid #00f2ff;
-    padding-left: 10px;
-    margin-bottom: 25px;
+/* chatbox */
+
+.chat-box{
+
+height:65px;
+overflow-y:hidden;
+
+padding:10px;
+
+border-radius:12px;
+
+background:rgba(0,0,0,0.45);
+
+border:1px solid rgba(255,255,255,0.08);
+
+color:#e6faff;
+
+margin-bottom:20px;
+
+transition:height 0.6s ease;
 }
 
-/* AI message */
-.message.ai {
-    border-left: 3px solid #ff7b7b;
-    padding-left: 10px;
-    background: rgba(255,255,255,0.03);
-    padding-top: 8px;
-    padding-bottom: 8px;
+.chat-box.active{
+
+height:320px;
+
+overflow-y:auto;
+
 }
 
-/* Bullet spacing exactly 0.6em */
-.message.ai br + br {
-    margin-bottom: 0.6em;
-    display: block;
-    content: "";
+/* messages */
+
+.message{
+margin-bottom:18px;
+line-height:1.7;
+white-space:pre-line;
 }
 
-/* Textareas */
-textarea {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 12px;
-    border-radius: 10px;
-    border: none;
-    resize: none;
-    background: rgba(255,255,255,0.1);
-    color: white;
+.message.user{
+border-left:3px solid #00f2ff;
+padding-left:10px;
+margin-bottom:25px;
 }
 
-textarea::placeholder {
-    color: #bbb;
+.message.ai{
+border-left:3px solid #ff7b7b;
+padding-left:10px;
+background:rgba(255,255,255,0.04);
+padding:8px;
 }
 
-/* Buttons */
-.button-group {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
+/* inputs */
+
+textarea{
+
+width:100%;
+padding:10px;
+margin-bottom:12px;
+
+border-radius:10px;
+
+border:none;
+
+resize:none;
+
+background:rgba(255,255,255,0.07);
+
+color:white;
+
+font-family:'Orbitron';
+
 }
 
-.send-btn {
-    padding: 12px;
-    border: none;
-    border-radius: 12px;
-    background: linear-gradient(135deg, #00f2ff, #0066ff);
-    color: white;
-    font-weight: 600;
-    cursor: pointer;
-    transition: 0.3s;
+select{
+
+width:100%;
+
+padding:10px;
+
+margin-bottom:12px;
+
+border-radius:10px;
+
+border:none;
+
+background:rgba(255,255,255,0.07);
+
+color:white;
+
+font-family:'Orbitron';
+
 }
 
-.send-btn:hover {
-    transform: scale(1.05);
+/* buttons */
+
+.button-group{
+display:flex;
+flex-direction:column;
+gap:12px;
 }
 
-.clear-btn {
-    padding: 12px;
-    border: none;
-    border-radius: 12px;
-    background: linear-gradient(135deg, #ff416c, #ff4b2b);
-    color: white;
-    font-weight: 600;
-    cursor: pointer;
-    transition: 0.3s;
+.send-btn{
+
+padding:12px;
+
+border:none;
+
+border-radius:12px;
+
+background:linear-gradient(135deg,#00f2ff,#0066ff);
+
+color:white;
+
+cursor:pointer;
+
+transition:0.3s;
+
 }
 
-.clear-btn:hover {
-    transform: scale(1.05);
+.send-btn:hover{
+
+transform:scale(1.05);
+
+box-shadow:0 0 25px rgba(0,242,255,0.9);
+
 }
 
-/* Fade out */
-.fade-out {
-    animation: fadeOut 0.5s forwards;
+.clear-btn{
+
+padding:12px;
+
+border:none;
+
+border-radius:12px;
+
+background:linear-gradient(135deg,#ff416c,#ff4b2b);
+
+color:white;
+
+cursor:pointer;
+
+transition:0.3s;
+
 }
 
-/* Animations */
-@keyframes fadeIn {
-    from {opacity: 0;}
-    to {opacity: 1;}
-}
+.clear-btn:hover{
 
-@keyframes fadeSlide {
-    from {opacity: 0; transform: translateY(8px);}
-    to {opacity: 1; transform: translateY(0);}
-}
+transform:scale(1.05);
 
-@keyframes fadeOut {
-    from {opacity: 1;}
-    to {opacity: 0;}
 }
