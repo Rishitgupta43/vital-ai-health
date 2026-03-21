@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Dashboard</title>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600&display=swap" rel="stylesheet">
+
+<style>
+
+body {
+    margin: 0;
+    font-family: 'Orbitron', sans-serif;
+    background: radial-gradient(circle, #0f2027, #203a43, #2c5364);
+    color: white;
+}
+
+/* Container */
+.container {
+    width: 80%;
+    margin: 40px auto;
+    padding: 25px;
+    border-radius: 20px;
+    background: rgba(255,255,255,0.05);
+    backdrop-filter: blur(20px);
+    box-shadow: 0 0 40px rgba(0,255,255,0.3);
+}
+
+/* Header */
+h1 {
+    color: #00f2ff;
+}
+
+.section {
+    margin-top: 20px;
+}
+
+.chat {
+    margin-top: 10px;
+    padding: 10px;
+    border-left: 3px solid #00f2ff;
+}
+
+/* Button */
+button {
+    margin-top: 20px;
+    padding: 12px 20px;
+    border-radius: 10px;
+    border: none;
+    background: linear-gradient(135deg, #00f2ff, #0066ff);
+    color: white;
+    cursor: pointer;
+}
+
+button:hover {
+    transform: scale(1.05);
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>Welcome {{username}}</h1>
+
+<div class="section">
+<h3>🧬 Your Health Profile</h3>
+<pre>{{history}}</pre>
+</div>
+
+<a href="/chat/{{username}}">
+<button>Open VITAL Chat</button>
+</a>
+
+<div class="section">
+<h3>💬 Previous Conversations</h3>
+
+{% for chat in chats %}
+<div class="chat">
+<b>You:</b> {{chat.user}} <br>
+<b>VITAL:</b> {{chat.ai}}
+</div>
+{% endfor %}
+
+</div>
+
+</div>
+
+</body>
+</html>

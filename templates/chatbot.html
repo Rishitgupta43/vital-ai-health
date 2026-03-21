@@ -1,17 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
 <meta charset="UTF-8">
+<title>V.I.T.A.L AI</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>VITAL AI</title>
 
 <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 
-<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600&display=swap" rel="stylesheet">
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 
 <body>
@@ -19,90 +15,72 @@
 <div class="chat-container">
 
 <h1>V.I.T.A.L</h1>
-<p class="subtitle">AI Clinical Health Assessment</p>
+<p class="subtitle">AI Health Intelligence System</p>
 
 <div id="ChatArea" class="chat-box"></div>
 
 <form id="chatForm">
 
-<textarea id="message1" placeholder="Enter Symptoms"></textarea>
+<textarea id="message1" placeholder="Symptoms"></textarea>
+<textarea id="message2" placeholder="Vitals (Heart rate, sleep etc.)"></textarea>
+<textarea id="message3" placeholder="Facial indicators"></textarea>
 
-<textarea id="message2" placeholder="Enter Vitals (heart rate, temperature etc)"></textarea>
-
-<textarea id="message3" placeholder="Facial indicators (pale, tired eyes etc)"></textarea>
-
-
-<!-- SLEEP -->
-
-<label>Sleep</label>
-
+<!-- Sleep -->
 <select id="sleep_hours">
-<option value="">Average sleep per night</option>
-<option value="<5h"><5 hours</option>
-<option value="5-6h">5–6 hours</option>
-<option value="6-7h">6–7 hours</option>
-<option value="7-8h">7–8 hours</option>
-<option value="8+h">8+ hours</option>
+<option value="">Sleep Hours</option>
+<option>&lt;5h</option>
+<option>5–6h</option>
+<option>6–7h</option>
+<option>7–8h</option>
+<option>8+ h</option>
 </select>
 
 <select id="sleep_quality">
 <option value="">Sleep Quality</option>
-<option value="Poor">Poor</option>
-<option value="Average">Average</option>
-<option value="Good">Good</option>
+<option>Poor</option>
+<option>Average</option>
+<option>Good</option>
 </select>
 
 <select id="wake_refreshed">
-<option value="">Wake up feeling refreshed?</option>
+<option value="">Wake Refreshed?</option>
 <option>Yes</option>
 <option>No</option>
 </select>
 
-
-<!-- EXERCISE -->
-
-<label>Exercise</label>
-
+<!-- Exercise -->
 <select id="exercise_freq">
-<option value="">Exercise frequency</option>
-<option>0 days</option>
-<option>1–2 days</option>
-<option>3–4 days</option>
-<option>5+ days</option>
+<option value="">Exercise Frequency</option>
+<option>0</option>
+<option>1–2</option>
+<option>3–4</option>
+<option>5+</option>
 </select>
 
 <select id="exercise_type">
-<option value="">Exercise type</option>
+<option value="">Exercise Type</option>
 <option>None</option>
 <option>Strength</option>
 <option>Cardio</option>
 <option>Mixed</option>
 </select>
 
-
-<!-- DIET -->
-
-<label>Diet</label>
-
+<!-- Diet -->
 <select id="diet_type">
-<option value="">Diet type</option>
-<option>Non-Veg</option>
+<option value="">Diet Type</option>
 <option>Vegetarian</option>
+<option>Non-Veg</option>
 <option>Vegan</option>
 </select>
 
 <select id="processed_food">
-<option value="">Ultra processed food intake</option>
+<option value="">Processed Food Intake</option>
 <option>Low</option>
 <option>Moderate</option>
 <option>High</option>
 </select>
 
-
-<!-- SUBSTANCES -->
-
-<label>Substances</label>
-
+<!-- Substances -->
 <select id="alcohol">
 <option value="">Alcohol</option>
 <option>None</option>
@@ -112,34 +90,28 @@
 </select>
 
 <select id="smoking">
-<option value="">Smoking / Vaping</option>
+<option value="">Smoking/Vaping</option>
 <option>Never</option>
 <option>Former</option>
 <option>Current</option>
 </select>
 
 <select id="caffeine">
-<option value="">Caffeine intake</option>
+<option value="">Caffeine</option>
 <option>0</option>
 <option>1–2 cups</option>
-<option>3–4 cups</option>
+<option>3–4</option>
 <option>5+</option>
 </select>
 
-
 <div class="button-group">
-
-<button type="submit" class="send-btn">ANALYZE</button>
-
-<button type="button" id="clearChat" class="clear-btn">NEW CHAT</button>
-
+<button type="submit" class="send-btn">Analyze</button>
+<button type="button" id="clearChat" class="clear-btn">New Chat</button>
 </div>
 
 </form>
 
 </div>
-
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
 <script src="{{ url_for('static', filename='js/script.js') }}"></script>
 

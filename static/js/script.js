@@ -1,77 +1,108 @@
-$(document).ready(function(){
+$(document).ready(function () {
 
-function addMessage(text,type){
+    // Extract username from URL
+    let username = window.location.pathname.split("/").pop();
 
-let msg=$("<div>").addClass("message "+type)
 
-msg.text(text)
+    function addMessage(text, type) {
 
-$("#ChatArea").append(msg)
+        let msg = $("<div>").addClass("message " + type);
 
-$("#ChatArea").scrollTop($("#ChatArea")[0].scrollHeight)
+        // Convert line breaks to proper spacing
+        let formattedText = text.replace(/\n/g, "<br>");
 
-}
+        msg.html(formattedText);
 
-$("#chatForm").submit(function(e){
+        $("#ChatArea").append(msg);
 
-e.preventDefault()
+        $("#ChatArea").scrollTop($("#ChatArea")[0].scrollHeight);
+    }
 
-let msg1=$("#message1").val()
-let msg2=$("#message2").val()
-let msg3=$("#message3").val()
 
-let sleep_hours=$("#sleep_hours").val()
-let sleep_quality=$("#sleep_quality").val()
-let wake_refreshed=$("#wake_refreshed").val()
+    $("#chatForm").submit(function (e) {
 
-let exercise_freq=$("#exercise_freq").val()
-let exercise_type=$("#exercise_type").val()
+        e.preventDefault();
 
-let diet_type=$("#diet_type").val()
-let processed_food=$("#processed_food").val()
+        let msg1 = $("#message1").val();
+        let msg2 = $("#message2").val();
+        let msg3 = $("#message3").val();
 
-let alcohol=$("#alcohol").val()
-let smoking=$("#smoking").val()
-let caffeine=$("#caffeine").val()
+        let sleep_hours = $("#sleep_hours").val();
+        let sleep_quality = $("#sleep_quality").val();
+        let wake_refreshed = $("#wake_refreshed").val();
 
-$("#ChatArea").addClass("active")
+        let exercise_freq = $("#exercise_freq").val();
+        let exercise_type = $("#exercise_type").val();
 
-addMessage(msg1,"user")
+        let diet_type = $("#diet_type").val();
+        let processed_food = $("#processed_food").val();
 
-$.post("/ask",{
+        let alcohol = $("#alcohol").val();
+        let smoking = $("#smoking").val();
+        let caffeine = $("#caffeine").val();
 
-message1:msg1,
-message2:msg2,
-message3:msg3,
+        if (!msg1) return;
 
-sleep_hours:sleep_hours,
-sleep_quality:sleep_quality,
-wake_refreshed:wake_refreshed,
+        $("#ChatArea").addClass("active");
 
-exercise_freq:exercise_freq,
-exercise_type:exercise_type,
+        addMessage("🧑 " + msg1, "user");
 
-diet_type:diet_type,
-processed_food:processed_food,
 
-alcohol:alcohol,
-smoking:smoking,
-caffeine:caffeine
+        // Loading message
+        let loading = $("<div class='message ai'>Analyzing...</div>");
+        $("#ChatArea").append(loading);
 
-},function(data){
 
-addMessage(data,"ai")
+        $.post("/ask/" + username, {
 
-})
+            message1: msg1,
+            message2: msg2,
+            message3: msg3,
 
-})
+            sleep_hours: sleep_hours,
+            sleep_quality: sleep_quality,
+            wake_refreshed: wake_refreshed,
 
-$("#clearChat").click(function(){
+            exercise_freq: exercise_freq,
+            exercise_type: exercise_type,
 
-$("#ChatArea").removeClass("active")
+            diet_type: diet_type,
+            processed_food: processed_food,
 
-$("#ChatArea").html("")
+            alcohol: alcohol,
+            smoking: smoking,
+            caffeine: caffeine
 
-})
+        })
+        .done(function (data) {
 
-})
+            loading.remove();
+
+            addMessage("🤖 " + data, "ai");
+
+        })
+        .fail(function () {
+
+            loading.remove();
+
+            addMessage("⚠️ Server error. Try again.", "ai");
+        });
+
+
+        // Clear inputs
+        $("#message1, #message2, #message3").val("");
+    });
+
+
+    // Clear chat with animation
+    $("#clearChat").click(function () {
+
+        $("#ChatArea").fadeOut(300, function () {
+
+            $(this).html("").removeClass("active").fadeIn(300);
+
+        });
+
+    });
+
+});
