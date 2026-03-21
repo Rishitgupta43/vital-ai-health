@@ -3,5 +3,23 @@
         "history": "Country: india\n\nHeart Disease: Yes\nDiabetes: No\nHigh Blood Pressure: Yes\nRespiratory Issues: Yes\nStress/Anxiety: Yes\n\nOther Issues: Frequent Headaches",
         "country": "india",
         "chats": []
+    },
+    "Rishit": {
+        "history": "Country: india\n\nHeart Disease: Yes\nDiabetes: Yes\nHigh Blood Pressure: Yes\nRespiratory Issues: Yes\nStress/Anxiety: Yes\n\nOther Issues: None",
+        "country": "india",
+        "chats": [
+            {
+                "user": "Headache | heartrate over 100 | pale skin",
+                "ai": "\u26a0\ufe0f AI core malfunction."
+            },
+            {
+                "user": "Headache | high bp | pale skin",
+                "ai": "\u26a0\ufe0f AI core malfunction."
+            },
+            {
+                "user": "headache | high bp | pale skin",
+                "ai": "\ud83e\udde0 VITAL Assessment\n\nMost Likely Causes:\n\u2022 Hypertensive Emergency: A severe spike in blood pressure that can cause organ damage.\n\n\n\u2022 Acute Cardiovascular Distress: Potential heart-related strain given your history of heart disease and current pale skin.\n\n\nWhy It Matches:\n\u2022 The combination of high blood pressure and a headache is a critical warning sign for individuals with pre-existing heart disease.\n\n\n\u2022 Pale skin (pallor) combined with cardiovascular history suggests poor peripheral circulation or significant systemic stress.\n\n\nHome Remedies:\n\u2022 Sit upright in a quiet, dark room to help lower intracranial pressure and reduce sensory stress.\n\n\n\u2022 Perform slow, rhythmic deep breathing to help calm the nervous system, though this is not a substitute for medical care.\n\n\nPrecautions:\n\u2022 Avoid any physical exertion, including walking or lifting objects, as this increases the load on your heart.\n\n\n\u2022 Do not take any new medications or extra doses of your current medicine without direct doctor approval.\n\n\nRecommended Action:\n\u2022 SEEK IMMEDIATE HELP: Call 112 or have someone take you to the nearest emergency department immediately.\n\n\n\u2022 Inform the medical staff specifically about your history of heart disease, diabetes, and the sudden onset of paleness with high blood pressure.\n\n\nSystem Status:\n\u2022 \ud83d\udd34 Medical Emergency\n\n\n\u2022 SEEK IMMEDIATE HELP\n\n\n\u2022 Ambulance: 112\n"
+            }
+        ]
     }
 }
