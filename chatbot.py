@@ -1,11 +1,13 @@
 from flask import Flask, render_template, request, redirect, url_for
-from google import genai
+import google.generativeai as genai
 import json
 import os
 
 # ===== CONFIG =====
-API_KEY = "AIzaSyBVEgdRtjij2Hh7XDpnP2vgN08357Cn2DU"
-client = genai.Client(api_key=API_KEY)
+API_KEY = os.environ.get("AIzaSyBVEgdRtjij2Hh7XDpnP2vgN08357Cn2DU")  # use env variable for safety
+genai.configure(api_key=API_KEY)
+
+model = genai.GenerativeModel("gemini-3-flash-preview")
 
 app = Flask(__name__)
 DATA_FILE = "users.json"
@@ -40,20 +42,12 @@ def format_response(text):
 # ===== AI RESPONSE =====
 def get_response(prompt):
     try:
-        response = client.models.generate_content(
-            model="gemini-3-flash-preview",
-            contents=prompt
-        )
+        response = model.generate_content(prompt)
 
-        if hasattr(response, "text") and response.text:
+        if response.text:
             return format_response(response.text.strip())
 
-        if response.candidates:
-            for part in response.candidates[0].content.parts:
-                if hasattr(part, "text") and part.text:
-                    return format_response(part.text.strip())
-
-        return "• System anomaly. Unable to generate response."
+        return "• No response generated."
 
     except Exception as e:
         print("ERROR:", e)
@@ -140,7 +134,6 @@ def ask(username):
     if not msg1:
         return "• Please provide symptom details."
 
-    # ===== EMERGENCY NUMBERS =====
     emergency_numbers = {
         "india": "112",
         "usa": "911",
@@ -151,14 +144,11 @@ def ask(username):
 
     ambulance = emergency_numbers.get(country, "local emergency number")
 
-    # ===== AI PROMPT =====
     prompt = f"""
 You are V.I.T.A.L., an advanced AI medical assistant.
 
 User Background:
 {history}
-
-Current Input:
 
 Symptoms:
 {msg1}
@@ -205,20 +195,18 @@ System Status:
 🔴 Medical Emergency
 
 IMPORTANT:
-If System Status is 🔴:
-• Clearly say SEEK IMMEDIATE HELP
-• Mention ambulance number: {ambulance}
+If 🔴:
+• Say SEEK IMMEDIATE HELP
+• Ambulance: {ambulance}
 
 Rules:
 • Bullet format only
-• Leave one blank line after each bullet
+• One blank line after each bullet
 • No paragraphs
-• No unnecessary questions
 """
 
     reply = get_response(prompt)
 
-    # ===== SAVE CHAT =====
     if username in users:
         users[username]["chats"].append({
             "user": f"{msg1} | {msg2} | {msg3}",
