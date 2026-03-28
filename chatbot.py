@@ -4,7 +4,7 @@ import json
 import os
 
 # ===== CONFIG =====
-API_KEY = "AIzaSyDhg9XnY1jR_WYto4ewMVLsYzBPl9JmT_Q" # use env variable for safety
+API_KEY = "AIzaSyCmYE0pT729R37hryDTLjYWbnr9yBuf0Mo" # use env variable for safety
 genai.configure(api_key=API_KEY)
 
 model = genai.GenerativeModel("gemini-3-flash-preview")
@@ -218,5 +218,5 @@ Rules:
 
 # ===== RUN =====
 if __name__ == "__main__":
-    port = int(os.environ.get("PORT", 5000))
+    port = int(os.environ.get("PORT", 5001))
     app.run(host="0.0.0.0", port=port)

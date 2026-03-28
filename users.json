@@ -1,8 +1,17 @@
 {
     "Rishit Gupta": {
-        "history": "Country: india\n\nHeart Disease: Yes\nDiabetes: No\nHigh Blood Pressure: Yes\nRespiratory Issues: Yes\nStress/Anxiety: Yes\n\nOther Issues: Frequent Headaches",
+        "history": "Country: india\n\nHeart Disease: Yes\nDiabetes: Yes\nHigh Blood Pressure: Yes\nRespiratory Issues: Yes\nStress/Anxiety: Yes\n\nOther Issues: None",
         "country": "india",
-        "chats": []
+        "chats": [
+            {
+                "user": "Headache | 3 hrs of sleep | pale skin",
+                "ai": "\u26a0\ufe0f AI core malfunction."
+            },
+            {
+                "user": "Headache | 3hrs of sleep | pale skin",
+                "ai": "\ud83e\udde0 VITAL Assessment\n\nMost Likely Causes:\n\u2022 Hypertensive Urgency: A potential spike in blood pressure triggered by extreme sleep deprivation and existing hypertension.\n\n\n\u2022 Hypoglycemia or Hyperglycemia: Fluctuating blood sugar levels common in diabetic patients after poor sleep cycles.\n\n\nWhy It Matches:\n\u2022 High-Risk Profile: Existing heart disease and high blood pressure make the cardiovascular system highly sensitive to the stress of only 3 hours of sleep.\n\n\n\u2022 Physical Presentation: Pale skin combined with a headache often indicates circulatory strain or autonomic nervous system exhaustion.\n\n\nHome Remedies:\n\u2022 Immediate Rest: Lie down in a dark, quiet room with your head slightly elevated to help stabilize blood pressure.\n\n\n\u2022 Hydration: Sip room-temperature water slowly to ensure dehydration is not exacerbating the headache or skin pallor.\n\n\nPrecautions:\n\u2022 Avoid Stressors: Do not engage in physically demanding tasks or high-stress activities until your vitals are confirmed stable.\n\n\n\u2022 Medication Caution: Avoid taking new over-the-counter pain medications without consulting a doctor, as some can interfere with heart and blood pressure treatments.\n\n\nRecommended Action:\n\u2022 Immediate Vitals Check: Use your home monitoring devices to check your current blood pressure and blood glucose levels immediately.\n\n\n\u2022 Seek Emergency Help If: You experience chest pain, sudden weakness on one side of the body, blurred vision, or if your blood pressure reading is above 180/120 mmHg.\n\n\nSystem Status:\n\u2022 \ud83d\udfe1 Monitor\n"
+            }
+        ]
     },
     "Rishit": {
         "history": "Country: india\n\nHeart Disease: Yes\nDiabetes: Yes\nHigh Blood Pressure: Yes\nRespiratory Issues: Yes\nStress/Anxiety: Yes\n\nOther Issues: None",
