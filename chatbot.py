@@ -4,7 +4,7 @@ import json
 import os
 
 # ===== CONFIG =====
-API_KEY = "AIzaSyCmYE0pT729R37hryDTLjYWbnr9yBuf0Mo" # use env variable for safety
+API_KEY = "AIzaSyD3vLW8dbudeY-EZ2J3vBJKCdf6ldQfzSM" # use env variable for safety
 genai.configure(api_key=API_KEY)
 
 model = genai.GenerativeModel("gemini-3-flash-preview")
