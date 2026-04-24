@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Dashboard</title>
+<title>Dashboard - VITAL AI</title>
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600&display=swap" rel="stylesheet">
 
 <style>
@@ -12,9 +12,9 @@ body {
     font-family: 'Orbitron', sans-serif;
     background: radial-gradient(circle, #0f2027, #203a43, #2c5364);
     color: white;
+    min-height: 100vh;
 }
 
-/* Container */
 .container {
     width: 80%;
     margin: 40px auto;
@@ -25,22 +25,64 @@ body {
     box-shadow: 0 0 40px rgba(0,255,255,0.3);
 }
 
-/* Header */
 h1 {
     color: #00f2ff;
+    margin-bottom: 5px;
+}
+
+.email-tag {
+    color: #9fdcff;
+    font-size: 12px;
+    margin-bottom: 20px;
 }
 
 .section {
-    margin-top: 20px;
+    margin-top: 25px;
 }
 
-.chat {
-    margin-top: 10px;
-    padding: 10px;
+.section h3 {
+    color: #00f2ff;
+    border-bottom: 1px solid rgba(0,242,255,0.2);
+    padding-bottom: 8px;
+}
+
+pre {
+    background: rgba(0,0,0,0.3);
+    padding: 15px;
+    border-radius: 10px;
     border-left: 3px solid #00f2ff;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 12px;
+    white-space: pre-wrap;
+    line-height: 1.8;
 }
 
-/* Button */
+.chat-entry {
+    margin-top: 14px;
+    padding: 14px;
+    border-left: 3px solid #00f2ff;
+    background: rgba(255,255,255,0.04);
+    border-radius: 0 10px 10px 0;
+    font-size: 12px;
+    line-height: 1.8;
+}
+
+.chat-entry .you {
+    color: #00f2ff;
+    margin-bottom: 6px;
+}
+
+.chat-entry .vital {
+    color: #e0e0e0;
+    white-space: pre-wrap;
+}
+
+.no-chats {
+    color: #888;
+    font-size: 12px;
+    margin-top: 10px;
+}
+
 button {
     margin-top: 20px;
     padding: 12px 20px;
@@ -49,10 +91,13 @@ button {
     background: linear-gradient(135deg, #00f2ff, #0066ff);
     color: white;
     cursor: pointer;
+    font-family: 'Orbitron', sans-serif;
+    transition: 0.3s;
 }
 
 button:hover {
     transform: scale(1.05);
+    box-shadow: 0 0 20px rgba(0,242,255,0.6);
 }
 
 </style>
@@ -62,28 +107,33 @@ button:hover {
 
 <div class="container">
 
-<h1>Welcome {{username}}</h1>
+    <h1>Welcome, {{ user.name }}</h1>
+    <div class="email-tag">{{ user.email }}</div>
 
-<div class="section">
-<h3>🧬 Your Health Profile</h3>
-<pre>{{history}}</pre>
-</div>
+    <div class="section">
+        <h3>🧬 Your Health Profile</h3>
+        <pre>{{ user.history }}</pre>
+    </div>
 
-<a href="/chat/{{username}}">
-<button>Open VITAL Chat</button>
-</a>
+    <a href="/chat/{{ user.username }}">
+        <button>⚡ Open VITAL Chat</button>
+    </a>
 
-<div class="section">
-<h3>💬 Previous Conversations</h3>
+    <div class="section">
+        <h3>💬 Previous Conversations</h3>
 
-{% for chat in chats %}
-<div class="chat">
-<b>You:</b> {{chat.user}} <br>
-<b>VITAL:</b> {{chat.ai}}
-</div>
-{% endfor %}
+        {% if chats %}
+            {% for chat in chats %}
+            <div class="chat-entry">
+                <div class="you"><b>You:</b> {{ chat.user_msg }}</div>
+                <div class="vital"><b>VITAL:</b> {{ chat.ai_msg }}</div>
+            </div>
+            {% endfor %}
+        {% else %}
+            <p class="no-chats">No conversations yet. Start chatting with VITAL!</p>
+        {% endif %}
 
-</div>
+    </div>
 
 </div>
 

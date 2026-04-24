@@ -1,14 +1,13 @@
 $(document).ready(function () {
 
-    // Extract username from URL
-    let username = window.location.pathname.split("/").pop();
+    // ✅ FIXED: Get username from Flask instead of URL
+    let username = $("#chatForm").data("username");
 
 
     function addMessage(text, type) {
 
         let msg = $("<div>").addClass("message " + type);
 
-        // Convert line breaks to proper spacing
         let formattedText = text.replace(/\n/g, "<br>");
 
         msg.html(formattedText);
@@ -94,7 +93,6 @@ $(document).ready(function () {
     });
 
 
-    // Clear chat with animation
     $("#clearChat").click(function () {
 
         $("#ChatArea").fadeOut(300, function () {

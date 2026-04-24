@@ -19,11 +19,12 @@
 
 <div id="ChatArea" class="chat-box"></div>
 
-<form id="chatForm">
+<!-- ✅ FIXED ACTION -->
+<form id="chatForm" data-username="{{ user.username }}" >
 
-<textarea id="message1" placeholder="Symptoms"></textarea>
-<textarea id="message2" placeholder="Vitals (Heart rate, sleep etc.)"></textarea>
-<textarea id="message3" placeholder="Facial indicators"></textarea>
+<textarea name="message1" id="message1" placeholder="Symptoms"></textarea>
+<textarea name="message2" id="message2" placeholder="Vitals (Heart rate, sleep etc.)"></textarea>
+<textarea name="message3" id="message3" placeholder="Facial indicators"></textarea>
 
 <!-- Sleep -->
 <select id="sleep_hours">
@@ -113,7 +114,39 @@
 
 </div>
 
-<script src="{{ url_for('static', filename='js/script.js') }}"></script>
+<!-- ✅ FIXED SCRIPT -->
+<script>
+$("#chatForm").submit(function(e){
+    e.preventDefault();
+
+    let formData = $(this).serialize();
+
+    $.post("/ask/{{ user.username }}", formData, function(response){
+
+        $("#ChatArea").addClass("active");
+
+        $("#ChatArea").append(`
+            <div class="message user">${$("#message1").val()}</div>
+            <div class="message ai">${response}</div>
+        `);
+
+        $("#message1").val("");
+        $("#message2").val("");
+        $("#message3").val("");
+    });
+});
+
+$("#clearChat").click(function(){
+    let confirmSave = confirm("Do you want to save this chat?");
+
+    if(confirmSave){
+        alert("Chat already saved automatically.");
+    }
+
+    $("#ChatArea").html("");
+    $("#ChatArea").removeClass("active");
+});
+</script>
 
 </body>
 </html>

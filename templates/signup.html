@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Create Account - VITAL AI</title>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600&display=swap" rel="stylesheet">
+
+<style>
+body{
+margin:0;
+min-height:100vh;
+font-family:'Orbitron';
+background: radial-gradient(circle at top,#0f2027,#203a43,#2c5364);
+color:white;
+padding:30px;
+box-sizing:border-box;
+}
+
+.container{
+max-width:500px;
+margin:auto;
+background:rgba(255,255,255,0.05);
+padding:30px;
+border-radius:20px;
+backdrop-filter:blur(20px);
+border:1px solid rgba(255,255,255,0.12);
+box-shadow:0 0 30px rgba(0,255,255,0.2);
+}
+
+h2{
+color:#00f2ff;
+margin-bottom:20px;
+}
+
+input, select{
+width:100%;
+padding:10px;
+margin-bottom:12px;
+border:none;
+border-radius:10px;
+background:rgba(255,255,255,0.08);
+color:white;
+font-family:'Orbitron';
+font-size:12px;
+box-sizing:border-box;
+}
+
+select option{
+background:#1a2a3a;
+color:white;
+}
+
+button{
+width:100%;
+padding:12px;
+border:none;
+border-radius:12px;
+background:linear-gradient(135deg,#00f2ff,#0066ff);
+color:white;
+cursor:pointer;
+font-family:'Orbitron';
+transition:0.3s;
+}
+
+button:hover{
+transform:scale(1.05);
+box-shadow:0 0 20px rgba(0,242,255,0.6);
+}
+
+.section-label {
+font-size:11px;
+color:#9fdcff;
+margin-bottom:8px;
+margin-top:16px;
+letter-spacing:1px;
+}
+
+.link{
+margin-top:15px;
+color:#ccc;
+font-size:12px;
+text-align:center;
+}
+
+a{
+color:#00f2ff;
+text-decoration:none;
+}
+
+/* Error message */
+.error-msg {
+background: rgba(255, 65, 108, 0.15);
+border: 1px solid rgba(255, 65, 108, 0.4);
+color: #ff7b9c;
+padding: 10px;
+border-radius: 10px;
+font-size: 11px;
+margin-bottom: 15px;
+line-height: 1.5;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+    <h2>⚡ Create Account</h2>
+
+    {% if error %}
+    <div class="error-msg">{{ error }}</div>
+    {% endif %}
+
+    <form method="POST">
+
+        <div class="section-label">PERSONAL INFO</div>
+        <input name="name" placeholder="Full Name" required>
+        <input name="email" type="email" placeholder="Email Address" required>
+        <input name="country" placeholder="Country (e.g. india, usa, uk)" required>
+
+        <div class="section-label">MEDICAL HISTORY</div>
+        <select name="q1">
+            <option value="No">Heart Disease?</option>
+            <option value="Yes">Yes</option>
+            <option value="No">No</option>
+        </select>
+        <select name="q2">
+            <option value="No">Diabetes?</option>
+            <option value="Yes">Yes</option>
+            <option value="No">No</option>
+        </select>
+        <select name="q3">
+            <option value="No">High Blood Pressure?</option>
+            <option value="Yes">Yes</option>
+            <option value="No">No</option>
+        </select>
+        <select name="q4">
+            <option value="No">Respiratory Issues?</option>
+            <option value="Yes">Yes</option>
+            <option value="No">No</option>
+        </select>
+        <select name="q5">
+            <option value="No">Stress / Anxiety?</option>
+            <option value="Yes">Yes</option>
+            <option value="No">No</option>
+        </select>
+
+        <input name="custom_issue" placeholder="Other major health issue (optional)">
+
+        <button type="submit">Create Account</button>
+
+    </form>
+
+    <div class="link">
+        Already have an account? <a href="/login">Login</a>
+    </div>
+</div>
+
+</body>
+</html>
